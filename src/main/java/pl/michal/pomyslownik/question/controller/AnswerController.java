@@ -3,9 +3,7 @@ package pl.michal.pomyslownik.question.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.michal.pomyslownik.question.domain.model.Answer;
-import pl.michal.pomyslownik.question.domain.model.Question;
 import pl.michal.pomyslownik.question.service.AnswerService;
-import pl.michal.pomyslownik.question.service.QuestionService;
 
 import java.util.List;
 import java.util.UUID;
