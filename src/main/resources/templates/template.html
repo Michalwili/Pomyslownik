@@ -1,27 +1,15 @@
 
 <!doctype html>
-<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org"
->
-<head><script src="/js/color-modes.js"></script>
-
+<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Michał Wilmowicz">
-    <meta name="" content="">
-    <title>Pomysłownik</title>
+    <title th:text="${title}">Default template title</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/custom.css}">
 
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#712cf9">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -170,11 +158,11 @@
                     <p class="text-body-secondary">Pomysłownik to aplikacja webowa, która pozwala użytkownikom na efektywne zarządzanie pomysłami, pytaniami oraz kategoriami. Głównym celem aplikacji jest organizowanie i katalogowanie myśli, co umożliwia lepsze zarządzanie kreatywnymi procesami. </p>
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4">
-                    <h4>Contact</h4>
+                    <h4>Kontakt</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                        <li><a href="#" class="text-white">Like on Facebook</a></li>
-                        <li><a href="#" class="text-white">Email me</a></li>
+<!--                        <li><a href="#" class="text-white">Follow on Twitter</a></li>-->
+                        <li><a href="#" class="text-white">Facebook</a></li>
+                        <li><a href="#" class="text-white">Email</a></li>
                     </ul>
                 </div>
             </div>
@@ -195,6 +183,36 @@
 </header>
 
 <main>
+
+    <div class="container" th:fragment="header">
+        <header class="border-bottom lh-1 py-3">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1">
+                    <a class="link-secondary" href="#">Subscribe</a>
+                </div>
+                <div class="col-4 text-center">
+                    <a class="blog-header-logo text-body-emphasis text-decoration-none" href="#">Kategorie</a>
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                    <a class="link-secondary" href="#" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24">
+                            <title>Search</title>
+                            <circle cx="10.5" cy="10.5" r="7.5"/>
+                            <path d="M21 21l-5.2-5.2"/>
+                        </svg>
+                    </a>
+                    <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="nav-scroller py-1 mb-3 border-bottom">
+            <nav class="nav nav-underline justify-content-between">
+                <a th:each="category : ${categories}" th:text="${category.name}" class="nav-item nav-link link-body-emphasis active" href="#">Kategoria</a>
+            </nav>
+        </div>
+    </div>
+
 
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
@@ -356,16 +374,16 @@
 
 </main>
 
-<footer class="text-body-secondary py-5">
+<footer class="text-body-secondary py-5" th:fragment="footer">
     <div class="container">
         <p class="float-end mb-1">
-            <a href="#">Back to top</a>
+            <a href="#">Wróć na górę</a>
         </p>
-        <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-        <p class="mb-0">New to Bootstrap? <a href="/static">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
+        <p class="mb-1">Aplikacja <strong>"Pomysłownik"</strong> została stworzona przez Michała Wilmowicza &copy; 2024.</p>
     </div>
+    <script src="/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/js/color-modes.js"></script>
 </footer>
-<script src="/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 </html>

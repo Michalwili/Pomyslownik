@@ -1,0 +1,35 @@
+.blog-header-logo {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.nav-item.active {
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+}
+
+.nav-item.nav-link {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: #495057;
+    padding: 0.5rem;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.nav-item.nav-link:hover {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+
+.btn-outline-secondary {
+    border-color: #007bff;
+    color: #007bff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #007bff;
+    color: white;
+}
