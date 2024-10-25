@@ -389,11 +389,10 @@
                                         </div>
                                         <form class="user" action="#" method="POST" th:object="${category}">
                                             <div class="form-group">
-                                                <input th:field="*{name}" type="text" class="form-control" id="nameInput" placeholder="Wprowadź nazwę" name="name">
+                                                <input th:field="*{name}" type="text" class="form-control" id="categoryName" placeholder="Wprowadź nazwę" name="name">
                                             </div>
                                             <input th:field="*{id}" type="hidden"/>
                                             <button type="submit" class="btn btn-primary btn-sm">Zapisz</button>
-                                        </form>
                                     </div>
                                 </div>
                             </div>

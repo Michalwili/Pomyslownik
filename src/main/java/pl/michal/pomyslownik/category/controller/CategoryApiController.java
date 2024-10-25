@@ -8,6 +8,7 @@ import pl.michal.pomyslownik.category.service.CategoryService;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,7 +27,7 @@ public class CategoryApiController {
     }
 
     @GetMapping("{id}")
-    Category getCategory(@PathVariable UUID id) {
+    Optional<Category> getCategory(@PathVariable UUID id) {
         return categoryService.getCategory(id);
     }
 
