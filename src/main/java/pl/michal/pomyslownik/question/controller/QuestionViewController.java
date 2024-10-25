@@ -35,9 +35,19 @@ public class QuestionViewController {
 
     }
 
+//    @GetMapping("{id}")
+//    public String singleView(Model model, @PathVariable UUID id) {
+//        model.addAttribute("question", questionService.getQuestion(id));
+//        model.addAttribute("answers", answerService.getAnswers(id));
+//        model.addAttribute("categories", categoryService.getCategories());
+//        return "question/single";
+//    }
+
     @GetMapping("{id}")
     public String singleView(Model model, @PathVariable UUID id) {
-        model.addAttribute("question", questionService.getQuestion(id));
+        Question question = questionService.getQuestion(id)
+                .orElseThrow(() -> new IllegalArgumentException("Question not found for id: " + id));
+        model.addAttribute("question", question);
         model.addAttribute("answers", answerService.getAnswers(id));
         model.addAttribute("categories", categoryService.getCategories());
         return "question/single";

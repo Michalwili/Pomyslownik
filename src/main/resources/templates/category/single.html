@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: head(title = 'Pomysłownik - ' + ${category.name})">
+    <link rel="stylesheet" href="/static/css/singleStyle.css">
+</head>
+<body>
+<th:block th:replace="template :: header" />
+<div class="container">
+    <div class="row g-5 justify-content-center">
+        <div class="col-md-8">
+
+            <article class="blog-post text-center">
+                <h2 class="display-5 link-body-emphasis mb-4" th:text="${category.name}"></h2>
+
+                <table class="table table-bordered table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="question : ${questions}">
+                        <td th:text="${question.name}">Pytanie</td>
+                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
+                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav class="blog-pagination" aria-label="Pagination">
+                    <a class="btn btn-outline-primary rounded-pill" href="#">Starsze</a>
+                    <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Nowsze</a>
+                </nav>
+            </article>
+
+            <p class="text-center" th:text="${category.name}"></p>
+
+        </div>
+    </div>
+</div>
+<th:block th:replace="template :: footer" />
+</body>
+</html>

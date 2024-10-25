@@ -6,6 +6,7 @@ import pl.michal.pomyslownik.question.service.QuestionService;
 import pl.michal.pomyslownik.question.domain.model.Question;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -24,7 +25,7 @@ public class QuestionApiController {
     }
 
     @GetMapping("{id}")
-    Question getQuestion(@PathVariable UUID id) {
+    Optional<Question> getQuestion(@PathVariable UUID id) {
         return questionsService.getQuestion(id);
     }
 

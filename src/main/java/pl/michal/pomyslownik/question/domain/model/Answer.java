@@ -1,20 +1,30 @@
 package pl.michal.pomyslownik.question.domain.model;
 
+import jakarta.persistence.*;
+
 import java.util.UUID;
 
+@Entity
+@Table(name = "answers")
 public class Answer {
 
+    @Id
     private UUID id;
 
     private String name;
 
-    public Answer() {
+    @ManyToOne
+    private Question question;
 
+
+    public Answer() {
+        super();
+        this.id = UUID.randomUUID();
     }
 
     public Answer(String name) {
+        this();
         this.name = name;
-        this.id = UUID.randomUUID();
     }
 
     public UUID getId() {
@@ -31,6 +41,14 @@ public class Answer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @Override

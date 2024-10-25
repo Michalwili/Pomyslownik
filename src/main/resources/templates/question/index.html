@@ -3,9 +3,6 @@
 <head th:replace="template :: head(title = 'Pomysłownik')"></head>
 <body>
     <th:block th:replace="template :: header" />
-    <ul>
-        <li th:each="question : ${questions}" th:text="${question.name}"></li>
-    </ul>
 
     <main>
         <section class="py-5 text-center container">
