@@ -1,10 +1,13 @@
 package pl.michal.pomyslownik.category.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.repository.CategoryRepository;
+import pl.michal.pomyslownik.question.domain.repository.QuestionRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +17,16 @@ import java.util.UUID;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final QuestionRepository questionRepository;
 
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, QuestionRepository questionRepository) {
         this.categoryRepository = categoryRepository;
+        this.questionRepository = questionRepository;
     }
 
     @Transactional(readOnly = true)
-    public List<Category> getCategories() {
-       return categoryRepository.findAll();
+    public Page<Category> getCategories(Pageable pageable) {
+       return categoryRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
@@ -52,7 +57,7 @@ public class CategoryService {
 
     @Transactional
     public void deleteCategory(UUID id) {
+        questionRepository.deleteByCategoryId(id);
         categoryRepository.deleteById(id);
-
     }
 }

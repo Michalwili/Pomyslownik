@@ -305,7 +305,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Michał</span>
                             <img class="img-profile rounded-circle"
                                  src="/admin/img/undraw_profile.svg">
                         </a>
@@ -344,7 +344,7 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Komponenty</h1>
                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                            class="fas fa-download fa-sm text-white-50"></i>Dodaj kategorię</a>
                 </div>
 
                 <!-- Begin Page Content -->
@@ -375,7 +375,7 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <tr th:each="category : ${categories}">
+                                    <tr th:each="category : ${categoriesPage.content}">
                                         <td th:text="${category.name}"></td>
                                         <td>
                                             <a th:href="@{'/categories/' +${category.id}}" class="btn btn-primary btn-sm">
@@ -391,6 +391,16 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div class="card-footer clearfix">
+                                    <ul class="pagination pagination-sm m-0 float-right"
+                                        th:if="${categoriesPage.totalPages > 0}">
+                                        <li th:each="pageNumber : ${pageNumbers}" class="page-item">
+                                            <a class="page-link"
+                                               th:href="@{'/admin/categories'(size=${categoriesPage.size}, page=${pageNumber}-1)}"
+                                               th:text="${pageNumber}"></a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -422,26 +432,27 @@
 <a class="scroll-to-top rounded" href="#page-top" th:fragment="scroll-to-top">
     <i class="fas fa-angle-up"></i>
 </a>
+<th:block th:replace="admin/template :: logout"/>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
+<!--&lt;!&ndash; Logout Modal&ndash;&gt;-->
+<!--<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
+<!--     aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>-->
+<!--                <button class="close" type="button" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">×</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>-->
+<!--                <a class="btn btn-primary" href="login.html">Logout</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <script src="/admin/vendor/jquery/jquery.min.js"></script>
 <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -450,6 +461,7 @@
 <script src="/admin/js/demo/chart-area-demo.js"></script>
 <script src="/admin/js/demo/chart-pie-demo.js"></script>
 <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 

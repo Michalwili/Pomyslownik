@@ -3,6 +3,8 @@ package pl.michal.pomyslownik.category.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
@@ -13,6 +15,8 @@ public class Category {
     @Id
     private UUID id;
 
+    @NotBlank(message = "{ideas.validation.name.NotBlank.message}")
+    @Size(min = 3, max = 255)
     private String name;
 
     public Category() {

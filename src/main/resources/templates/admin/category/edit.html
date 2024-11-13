@@ -28,6 +28,10 @@
         text-align: center;
         padding: 10px 0;
     }
+    .error {
+        color: red;
+        font-size: 12px;
+    }
 </style>
 
 <body id="page-top" class="main-content">
@@ -375,7 +379,6 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Edycja</h1>
                     <p class="mb-4"></p>
@@ -389,6 +392,7 @@
                                         </div>
                                         <form class="user" action="#" method="POST" th:object="${category}">
                                             <div class="form-group">
+                                                <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Błąd nazwy</span>
                                                 <input th:field="*{name}" type="text" class="form-control" id="categoryName" placeholder="Wprowadź nazwę" name="name">
                                             </div>
                                             <input th:field="*{id}" type="hidden"/>

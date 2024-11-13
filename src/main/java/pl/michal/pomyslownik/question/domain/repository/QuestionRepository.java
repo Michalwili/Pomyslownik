@@ -10,4 +10,7 @@ import java.util.UUID;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, UUID> {
     List<Question> findAllByCategoryId(UUID id);
+
+    void deleteByCategoryId(UUID categoryId);
+
 }

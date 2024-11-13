@@ -1,5 +1,7 @@
 package pl.michal.pomyslownik.category.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class CategoryViewController {
         Category category = categoryService.getCategory(id)
                 .orElseThrow(() -> new IllegalArgumentException("Category not found for id: " + id));
         List<Question> questions = questionService.findAllByCategoryId(id);
-        List<Category> categories = categoryService.getCategories();
+        Page<Category> categories = categoryService.getCategories(Pageable.unpaged());
 
 
         model.addAttribute("category", category);
