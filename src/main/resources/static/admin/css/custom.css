@@ -1,0 +1,13 @@
+.sort-asc:after {
+    content: " ↑";
+    font-size: 20px;
+    color: green;
+    font-weight: bold;
+}
+
+.sort-desc:after {
+    content: " ↓";
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+}

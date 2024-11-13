@@ -9,7 +9,6 @@ import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.service.CategoryService;
 
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

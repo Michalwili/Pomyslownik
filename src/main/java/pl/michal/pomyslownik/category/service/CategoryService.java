@@ -9,7 +9,6 @@ import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.repository.CategoryRepository;
 import pl.michal.pomyslownik.question.domain.repository.QuestionRepository;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,7 +25,16 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public Page<Category> getCategories(Pageable pageable) {
-       return categoryRepository.findAll(pageable);
+       return categoryRepository.findAll(null, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Category> getCategories(String search, Pageable pageable) {
+        if(search == null) {
+            return categoryRepository.findAll(pageable);
+        } else {
+            return categoryRepository.findByNameContainingIgnoreCase(search, pageable);
+        }
     }
 
     @Transactional(readOnly = true)
