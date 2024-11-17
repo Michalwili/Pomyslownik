@@ -6,8 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 import pl.michal.pomyslownik.category.model.Category;
 
-import java.util.Collections;
+
 import java.util.LinkedHashSet;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,14 +24,13 @@ public class Question {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Category category;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Answer> answers = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "question")
+    private Set<Answer> answers;
 
     public Question() {
-        super();
         this.id = UUID.randomUUID();
     }
 
@@ -39,12 +39,14 @@ public class Question {
         this.name = name;
     }
 
-    public Question addAnswer(Answer answer) {
+    public Question addAnswer(Answer answer){
+        if(answers == null){
+            answers = new LinkedHashSet<>();
+        }
+
         answer.setQuestion(this);
         answers.add(answer);
+
         return this;
     }
-
-
-
 }

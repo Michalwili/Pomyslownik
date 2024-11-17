@@ -9,6 +9,7 @@ import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.repository.CategoryRepository;
 import pl.michal.pomyslownik.question.domain.repository.QuestionRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,7 +48,6 @@ public class CategoryService {
         Category category = new Category();
         category.setName(categoryRequest.getName());
         return categoryRepository.save(category);
-
     }
 
     @Transactional
@@ -65,7 +65,10 @@ public class CategoryService {
 
     @Transactional
     public void deleteCategory(UUID id) {
-        questionRepository.deleteByCategoryId(id);
+        questionRepository.deleteByCategory_Id(id);
         categoryRepository.deleteById(id);
+    }
+    public List<Category> findAll() {
+        return categoryRepository.findAll();
     }
 }

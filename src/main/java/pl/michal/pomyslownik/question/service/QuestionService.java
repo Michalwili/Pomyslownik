@@ -33,18 +33,18 @@ public class QuestionService {
     @Transactional
     public Question createQuestion(Question questionRequest) {
         Question question = new Question();
+
         question.setName(questionRequest.getName());
+
         return questionRepository.save(question);
     }
 
     @Transactional
-    public Question updateQuestion(UUID
-                                               id, Question questionRequest) {
+    public Question updateQuestion(UUID id, Question questionRequest) {
         Optional<Question> optionalQuestion = questionRepository.findById(id);
-            if (optionalQuestion.isEmpty()) {
+        if (optionalQuestion.isEmpty()) {
             throw new EntityNotFoundException("Question not found with id: " + id);
         }
-
 
         Question question = optionalQuestion.get();
         question.setName(questionRequest.getName());
@@ -58,7 +58,7 @@ public class QuestionService {
 
     @Transactional(readOnly = true)
     public List<Question> findAllByCategoryId(UUID id) {
-        return questionRepository.findAllByCategoryId(id);
+        return questionRepository.findAllByCategory_Id(id);
     }
 
 //    @Transactional(readOnly = true)

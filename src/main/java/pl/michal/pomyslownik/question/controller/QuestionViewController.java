@@ -3,13 +3,10 @@ package pl.michal.pomyslownik.question.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.michal.pomyslownik.IdeasConfiguration;
-import pl.michal.pomyslownik.category.controller.ControllerUtils;
 import pl.michal.pomyslownik.category.service.CategoryService;
 import pl.michal.pomyslownik.common.controller.IdeasCommonViewController;
 import pl.michal.pomyslownik.question.domain.model.Question;
@@ -61,16 +58,19 @@ public class QuestionViewController extends IdeasCommonViewController {
     }
 
     @GetMapping("add")
-    public String addView(Model model) {
+    public String addView(Model model){
         model.addAttribute("question", new Question());
+
         return "question/add";
     }
 
     @PostMapping
-    public String add(Question question) {
+    public String add(Question question){
         questionService.createQuestion(question);
+
         return "redirect:/questions";
     }
+
 
     @GetMapping("hot")
     public String hotView(
@@ -101,4 +101,5 @@ public class QuestionViewController extends IdeasCommonViewController {
 
         return "question/index";
     }
+
 }

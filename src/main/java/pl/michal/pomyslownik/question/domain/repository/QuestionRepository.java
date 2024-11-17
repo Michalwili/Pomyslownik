@@ -12,9 +12,9 @@ import java.util.UUID;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, UUID> {
-    List<Question> findAllByCategoryId(UUID id);
+    List<Question> findAllByCategory_Id(UUID id);
 
-    void deleteByCategoryId(UUID categoryId);
+    void deleteByCategory_Id(UUID categoryId);
 
     @Query("select q from Question q left join q.answers a group by q order by count(a) desc")
     Page<Question> findHot(Pageable pageable);
