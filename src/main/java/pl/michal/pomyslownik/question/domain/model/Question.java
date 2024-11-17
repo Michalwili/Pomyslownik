@@ -1,6 +1,9 @@
 package pl.michal.pomyslownik.question.domain.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import pl.michal.pomyslownik.category.model.Category;
 
 import java.util.Collections;
@@ -10,6 +13,9 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "questions")
+@Getter
+@Setter
+@ToString
 public class Question {
 
     @Id
@@ -17,25 +23,15 @@ public class Question {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @OneToMany(mappedBy = "question")
-    private Set<Answer> answers;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Answer> answers = new LinkedHashSet<>();
 
     public Question() {
         super();
         this.id = UUID.randomUUID();
-    }
-
-    public Question addAnswer(Answer answer) {
-        if(answers == null) {
-            answers = new LinkedHashSet<>();
-        }
-        answer.setQuestion(this);
-        answers.add(answer);
-
-        return this;
     }
 
     public Question(String name) {
@@ -43,40 +39,12 @@ public class Question {
         this.name = name;
     }
 
-
-    public Category getCategory() {
-        return category;
+    public Question addAnswer(Answer answer) {
+        answer.setQuestion(this);
+        answers.add(answer);
+        return this;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
-    public UUID getId() {
-        return id;
-    }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Answer> getAnswers() {
-        return Collections.unmodifiableSet(answers);
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

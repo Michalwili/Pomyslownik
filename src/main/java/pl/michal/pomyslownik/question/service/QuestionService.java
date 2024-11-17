@@ -1,6 +1,9 @@
 package pl.michal.pomyslownik.question.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.michal.pomyslownik.question.domain.model.Question;
@@ -10,14 +13,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @Service
+@RequiredArgsConstructor
 public class QuestionService {
 
     private final QuestionRepository questionRepository;
-
-    public QuestionService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
 
     @Transactional(readOnly = true)
     public List<Question> getQuestions() {
@@ -58,6 +59,22 @@ public class QuestionService {
     @Transactional(readOnly = true)
     public List<Question> findAllByCategoryId(UUID id) {
         return questionRepository.findAllByCategoryId(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findHot(Pageable pageable) {
+        return questionRepository.findHot(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findUnanswered(Pageable pageable) {
+        return questionRepository.findUnanswered(pageable);
+
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findByQuery(String query, Pageable pageable) {
+        return questionRepository.findByQuery(query, pageable);
     }
 }
 

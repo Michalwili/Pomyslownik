@@ -1,32 +1,43 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="template :: head(title = 'Pomysłownik')"></head>
+<head th:replace="template :: head(title = 'Pomysłownik')">
+    <link rel="stylesheet" href="/static/css/singleStyle.css">
+</head>
 <body>
-    <th:block th:replace="template :: header" />
+<th:block th:replace="template :: header" />
+<div class="container">
+    <div class="row g-5 justify-content-center">
+        <div class="col-md-8">
 
-    <main>
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Pomysłownik - kategorie</h1>
-                    <p class="lead text-body-secondary"></p>
-                    <p>
-                        <a href="#" class="btn btn-primary my-2">X</a>
-                        <a href="#" class="btn btn-secondary my-2">X</a>
-                    </p>
-                </div>
-            </div>
-        </section>
+            <article class="blog-post text-center">
+                <table class="table table-bordered table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="question : ${questionsPage.content}">
+                        <td th:text="${question.name}">Pytanie</td>
+                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
+                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </article>
+            <nav th:if="${questionsPage.totalPages > 0}" class="blog-pagination" aria-label="Pagination">
+                <a class="btn btn-outline-primary" th:each="pageNumber : ${pageNumbers}"
+                   th:href="@{''(size=${questionsPage.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber == questionsPage.number + 1} ? 'btn btn-outline-primary disabled' : 'btn btn-outline-primary'"></a>
+            </nav>
 
 
-    </main>
-    <th:block th:replace="template :: footer" />
-    <script src="/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="/admin/js/sb-admin-2.js"></script>
-    <script src="/admin/vendor/chart.js/Chart.min.js"></script>
-    <script src="/admin/js/demo/chart-area-demo.js"></script>
-    <script src="/admin/js/demo/chart-pie-demo.js"></script>
+        </div>
+    </div>
+</div>
+<th:block th:replace="template :: footer" />
 </body>
 </html>

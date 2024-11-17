@@ -14,11 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.michal.pomyslownik.category.common.dto.Message;
 import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.service.CategoryService;
-
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static pl.michal.pomyslownik.category.controller.ControllerUtils.paging;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -90,15 +88,5 @@ public class CategoryAdminViewController {
         categoryService.deleteCategory(id);
         ra.addFlashAttribute("message", Message.info("Kategoria usunięta"));
         return "redirect:/admin/categories";
-    }
-
-    private void paging(Model model, Page page) {
-        int totalPages = page.getTotalPages();
-        if(totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
     }
 }
