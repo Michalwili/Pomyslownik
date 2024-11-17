@@ -54,67 +54,6 @@
             </div>
         </li>
 
-        <!--        &lt;!&ndash; Nav Item - Utilities Collapse Menu &ndash;&gt;-->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"-->
-        <!--               aria-expanded="true" aria-controls="collapseUtilities">-->
-        <!--                <i class="fas fa-fw fa-wrench"></i>-->
-        <!--                <span>Utilities</span>-->
-        <!--            </a>-->
-        <!--            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"-->
-        <!--                 data-parent="#accordionSidebar">-->
-        <!--                <div class="bg-white py-2 collapse-inner rounded">-->
-        <!--                    <h6 class="collapse-header">Custom Utilities:</h6>-->
-        <!--                    <a class="collapse-item" href="utilities-color.html">Colors</a>-->
-        <!--                    <a class="collapse-item" href="utilities-border.html">Borders</a>-->
-        <!--                    <a class="collapse-item" href="utilities-animation.html">Animations</a>-->
-        <!--                    <a class="collapse-item" href="utilities-other.html">Other</a>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </li>-->
-
-        <!-- Divider -->
-        <!--        <hr class="sidebar-divider">-->
-
-        <!--        &lt;!&ndash; Heading &ndash;&gt;-->
-        <!--        <div class="sidebar-heading">-->
-        <!--            Addons-->
-        <!--        </div>-->
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"-->
-        <!--               aria-expanded="true" aria-controls="collapsePages">-->
-        <!--                <i class="fas fa-fw fa-folder"></i>-->
-        <!--                <span>Pages</span>-->
-        <!--            </a>-->
-        <!--            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">-->
-        <!--                <div class="bg-white py-2 collapse-inner rounded">-->
-        <!--                    <h6 class="collapse-header">Login Screens:</h6>-->
-        <!--                    <a class="collapse-item" href="login.html">Login</a>-->
-        <!--                    <a class="collapse-item" href="register.html">Register</a>-->
-        <!--                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>-->
-        <!--                    <div class="collapse-divider"></div>-->
-        <!--                    <h6 class="collapse-header">Other Pages:</h6>-->
-        <!--                    <a class="collapse-item" href="404.html">404 Page</a>-->
-        <!--                    <a class="collapse-item" href="blank.html">Blank Page</a>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </li>-->
-
-        <!-- Nav Item - Charts -->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link" href="charts.html">-->
-        <!--                <i class="fas fa-fw fa-chart-area"></i>-->
-        <!--                <span>Charts</span></a>-->
-        <!--        </li>-->
-
-        <!-- Nav Item - Tables -->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link" href="tables.html">-->
-        <!--                <i class="fas fa-fw fa-table"></i>-->
-        <!--                <span>Tables</span></a>-->
-        <!--        </li>-->
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -342,72 +281,20 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Komponenty</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Dodaj kategorie</h1>
                     <a href="/admin/categories/add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i>Dodaj kategorię</a>
+                            class="fas fa-download fa-sm text-white-50"></i>Kreator dodawania kategori</a>
                 </div>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Kategorie</h1>
-                    <p class="mb-4"></p>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"></h6>
+                    <form action="/admin/categories/add" method="post" th:object="${category}">
+                        <div class="form-group">
+                            <label for="name">Nazwa kategorii</label>
+                            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="Wpisz nazwę kategorii" required>
                         </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th><a th:class="'sort-'+${reverseSort}"
-                                                th:href="@{'/admin/categories'(s=${search}, field='name', direction=${reverseSort})}">Nazwa</a></th>
-                                        <th>#</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nazwa</th>
-                                        <th>#</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <tr th:each="category, it : ${categoriesPage.content}">
-                                        <td th:text="${it.index}+1"></td>
-                                        <td th:text="${category.name}"></td>
-                                        <td>
-                                            <a th:href="@{'/categories/' +${category.id}}" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-folder"></i> Widok
-                                            </a>
-                                            <a th:href="@{'/admin/categories/' +${category.id}}" class="btn btn-info btn-sm">
-                                                <i class="fas fa-pencil-alt"></i> Edytuj
-                                            </a>
-                                            <a th:href="@{'/admin/categories/' +${category.id}+'/delete'}" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-trash"></i> Usuń
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div class="card-footer clearfix">
-                                    <ul class="pagination pagination-sm m-0 float-right"
-                                        th:if="${categoriesPage.totalPages > 0}">
-                                        <li th:each="pageNumber : ${pageNumbers}" class="page-item">
-                                            <a class="page-link"
-                                               th:href="@{'/admin/categories'(size=${categoriesPage.size}, page=${pageNumber}-1)}"
-                                               th:text="${pageNumber}"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Dodaj kategorię</button>
+                    </form>
 
                 </div>
             </div>

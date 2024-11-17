@@ -61,9 +61,17 @@ public class QuestionService {
         return questionRepository.findAllByCategoryId(id);
     }
 
+//    @Transactional(readOnly = true)
+//    public Page<Question> findHot(Pageable pageable) {
+//        return questionRepository.findHot(pageable);
+//    }
     @Transactional(readOnly = true)
     public Page<Question> findHot(Pageable pageable) {
-        return questionRepository.findHot(pageable);
+        Page<Question> result = questionRepository.findHot(pageable);
+        if (result == null) {
+            return Page.empty(pageable);
+        }
+        return result;
     }
 
     @Transactional(readOnly = true)

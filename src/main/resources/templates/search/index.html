@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: head(title = 'Pomysłownik - wyszukiwarka')">
+    <link rel="stylesheet" href="/static/css/singleStyle.css">
+</head>
+<body>
+<th:block th:replace="template :: header" />
+<div class="container">
+    <div class="row g-5 justify-content-center">
+        <div class="col-md-8">
+
+            <form>
+                <input type="text" name="query" th:value="${query}"/>
+                <button class="btn btn-primary" type="submit">Szukaj</button>
+            </form>
+            <br>
+            <p th:if="${query != null and questionsPage.getNumberOfElements() == 0}">Brak wyników</p>
+
+            <article class="blog-post text-center" th:if="${questionsPage != null and questionsPage.totalElements > 0}">
+                <table class="table table-bordered table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="question : ${questionsPage.content}">
+                        <td th:text="${question.name}">Pytanie</td>
+                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
+                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </article>
+            <nav th:if="${questionsPage != null and questionsPage.totalPages > 0}" class="blog-pagination" aria-label="Pagination">
+                <a class="btn btn-outline-primary" th:each="pageNumber : ${pageNumbers}"
+                   th:href="@{''(size=${questionsPage.size}, page=${pageNumber}, query=${query})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber == questionsPage.number + 1} ? 'btn btn-outline-primary disabled' : 'btn btn-outline-primary'"></a>
+            </nav>
+
+
+        </div>
+    </div>
+</div>
+<th:block th:replace="template :: footer" />
+</body>
+</html>

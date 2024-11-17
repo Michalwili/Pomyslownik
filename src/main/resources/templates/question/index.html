@@ -10,29 +10,53 @@
         <div class="col-md-8">
 
             <article class="blog-post text-center">
-                <table class="table table-bordered table-striped text-center">
-                    <thead>
-                    <tr>
-                        <th>Nazwa</th>
-                        <th>Edytuj</th>
-                        <th>Usuń</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="question : ${questionsPage.content}">
-                        <td th:text="${question.name}">Pytanie</td>
-                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div th:if="${questionsPage != null and questionsPage.content != null}">
+                    <table class="table table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Edytuj</th>
+                            <th>Usuń</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="question : ${questionsPage.content}">
+                            <td th:text="${question.name}">Pytanie</td>
+                            <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
+                            <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${questionsPage == null or questionsPage.content == null or questionsPage.content.isEmpty()}">
+                    <p>Wybierz kategorię żeby zobaczyć pytania.</p>
+                </div>
+<!--                -->
+<!--                <table class="table table-bordered table-striped text-center">-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th>Nazwa</th>-->
+<!--                        <th>Edytuj</th>-->
+<!--                        <th>Usuń</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                    <tr th:each="question : ${questionsPage.content}">-->
+<!--                        <td th:text="${question.name}">Pytanie</td>-->
+<!--                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>-->
+<!--                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
             </article>
-            <nav th:if="${questionsPage.totalPages > 0}" class="blog-pagination" aria-label="Pagination">
+            <nav th:if="${questionsPage != null and questionsPage.totalPages > 0}" class="blog-pagination" aria-label="Pagination">
                 <a class="btn btn-outline-primary" th:each="pageNumber : ${pageNumbers}"
                    th:href="@{''(size=${questionsPage.size}, page=${pageNumber})}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber == questionsPage.number + 1} ? 'btn btn-outline-primary disabled' : 'btn btn-outline-primary'"></a>
             </nav>
+
 
 
         </div>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: head(title = 'Pomysłownik')"></head>
+<body>
+    <th:block th:replace="template :: header" />
+
+    <main>
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">Pomysłownik - kategorie</h1>
+                    <p class="lead text-body-secondary"></p>
+                    <p>
+                        <a href="#" class="btn btn-primary my-2">X</a>
+                        <a href="#" class="btn btn-secondary my-2">X</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+    <th:block th:replace="template :: footer" />
+    <script src="/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/admin/js/sb-admin-2.js"></script>
+    <script src="/admin/vendor/chart.js/Chart.min.js"></script>
+    <script src="/admin/js/demo/chart-area-demo.js"></script>
+    <script src="/admin/js/demo/chart-pie-demo.js"></script>
+</body>
+</html>
