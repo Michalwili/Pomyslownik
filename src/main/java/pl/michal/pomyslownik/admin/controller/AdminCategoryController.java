@@ -20,8 +20,8 @@ public class AdminCategoryController {
 
         @GetMapping("/add")
         public String showAddCategoryForm(Model model) {
-            model.addAttribute("category", new Category()); // Dodaj pustą kategorię do modelu
-            return "admin/category/add"; // Plik HTML w folderze templates/admin
+            model.addAttribute("category", new Category());
+            return "admin/category/add";
         }
 
 

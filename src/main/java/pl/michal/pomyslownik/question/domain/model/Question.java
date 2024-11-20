@@ -7,6 +7,7 @@ import lombok.ToString;
 import pl.michal.pomyslownik.category.model.Category;
 
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 
 import java.util.Set;
@@ -27,8 +28,12 @@ public class Question {
     @ManyToOne
     private Category category;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<Answer> answers;
+
+    private LocalDateTime created;
+
+    private LocalDateTime modified;
 
     public Question() {
         this.id = UUID.randomUUID();
@@ -39,8 +44,19 @@ public class Question {
         this.name = name;
     }
 
-    public Question addAnswer(Answer answer){
-        if(answers == null){
+    @PrePersist
+    void prePersist() {
+        created = LocalDateTime.now();
+        modified = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preUpdate() {
+        modified = LocalDateTime.now();
+    }
+
+    public Question addAnswer(Answer answer) {
+        if (answers == null) {
             answers = new LinkedHashSet<>();
         }
 

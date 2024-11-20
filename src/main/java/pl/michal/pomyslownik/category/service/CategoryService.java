@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.repository.CategoryRepository;
 import pl.michal.pomyslownik.question.domain.repository.QuestionRepository;
+import pl.michal.pomyslownik.category.dto.CategoryWithStatisticsDto;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -68,7 +70,9 @@ public class CategoryService {
         questionRepository.deleteByCategory_Id(id);
         categoryRepository.deleteById(id);
     }
-    public List<Category> findAll() {
-        return categoryRepository.findAll();
+
+    @Transactional(readOnly = true)
+    public List<CategoryWithStatisticsDto> findAllWithStatistics() {
+        return categoryRepository.findAllWithStatistics();
     }
 }

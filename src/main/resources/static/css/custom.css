@@ -1,44 +1,62 @@
+/* Kolory */
+:root {
+    --primary-color: #0A7075;
+    --secondary-color: #0C969C;
+    --highlight-color: #6BA3BE;
+    --dark-text-color: #031716;
+    --light-text-color: #032F30;
+    --accent-color: #274D60;
+}
+
+/* Logo nagłówka */
 .blog-header-logo {
     font-family: 'Arial', sans-serif;
     font-size: 1.8rem;
     font-weight: bold;
-    color: #343a40;
+    color: var(--accent-color);
 }
 
+/* Aktywny element w nawigacji */
 .nav-item.active {
     font-weight: bold;
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid var(--highlight-color);
 }
 
+/* Styl linków w nawigacji */
 .nav-item.nav-link {
     font-family: 'Arial', sans-serif;
     font-size: 1rem;
-    color: #495057;
+    color: var(--light-text-color);
     padding: 0.5rem;
     transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
+/* Styl linków w nawigacji przy najechaniu */
 .nav-item.nav-link:hover {
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
 }
 
+/* Styl przycisku */
 .btn-outline-secondary {
-    border-color: #007bff;
-    color: #007bff;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Styl przycisku przy najechaniu */
 .btn-outline-secondary:hover {
-    background-color: #007bff;
+    background-color: var(--secondary-color);
     color: white;
 }
+
+/* Przycisk do przewijania na górę */
 .back-to-top {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
     color: white;
-    background-color: #007bff;
+    background-color: var(--primary-color);
     padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.2s;
@@ -49,6 +67,197 @@
 }
 
 .back-to-top:hover {
-    background-color: #0056b3;
+    background-color: var(--secondary-color);
     transform: translateY(-2px);
+}
+
+/* Karty */
+.card {
+    border: 1px solid #e3e3e3;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-text-color);
+}
+
+/* Styl tabeli */
+.table {
+    font-family: 'Arial', sans-serif;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table th {
+    background-color: var(--highlight-color);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+}
+
+.table td {
+    padding: 10px;
+    text-align: center;
+    color: var(--light-text-color);
+    border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: var(--secondary-color);
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: var(--primary-color);
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table a {
+    color: var(--dark-text-color);
+    text-decoration: none;
+}
+
+.table a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* Styl linków w tytułach postów */
+.blog-post-title a {
+    color: var(--dark-text-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.blog-post-title a:hover {
+    text-decoration: underline;
+}
+
+/* Linki */
+a {
+    color: var(--accent-color);
+}
+
+/* Styl tabeli w wersji mobilnej */
+@media (max-width: 768px) {
+    .table {
+        font-size: 14px;
+    }
+
+    .table th, .table td {
+        padding: 8px;
+    }
+}
+
+/* Styl Placeholderów */
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+/* Podziałka */
+.b-example-divider {
+    width: 100%;
+    height: 3rem;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+/* Kolumna pionowa */
+.b-example-vr {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 100vh;
+}
+
+/* Ikony */
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+
+/* Scroller nawigacji */
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Przycisk Primary */
+.btn-bd-primary {
+    --bd-violet-bg: #712cf9;
+    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet-bg);
+    --bs-btn-border-color: var(--bd-violet-bg);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #6528e0;
+    --bs-btn-hover-border-color: #6528e0;
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #5a23c8;
+    --bs-btn-active-border-color: #5a23c8;
+}
+
+/* Przełącznik trybu */
+.bd-mode-toggle {
+    z-index: 1500;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+    display: block !important;
+}
+
+/* Ciało strony */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Stopka */
+footer {
+    margin-top: auto;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+footer p {
+    margin: 0;
 }

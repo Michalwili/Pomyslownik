@@ -3,16 +3,20 @@ package pl.michal.pomyslownik.question.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.michal.pomyslownik.IdeasConfiguration;
+import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.service.CategoryService;
 import pl.michal.pomyslownik.common.controller.IdeasCommonViewController;
 import pl.michal.pomyslownik.question.domain.model.Question;
 import pl.michal.pomyslownik.question.service.AnswerService;
 import pl.michal.pomyslownik.question.service.QuestionService;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static pl.michal.pomyslownik.category.controller.ControllerUtils.*;
@@ -47,15 +51,35 @@ public class QuestionViewController extends IdeasCommonViewController {
 //        return "question/single";
 //    }
 
-    @GetMapping("{id}")
-    public String singleView(Model model, @PathVariable UUID id) {
-        Question question = questionService.getQuestion(id)
-                .orElseThrow(() -> new IllegalArgumentException("Question not found for id: " + id));
-        model.addAttribute("question", question);
-        model.addAttribute("answers", answerService.getAnswers(id));
-        addGlobalAttributes(model);
-        return "question/single";
-    }
+//    @GetMapping("{id}")
+//    public String singleView(Model model, @PathVariable UUID id) {
+//        Question question = questionService.getQuestion(id)
+//                .orElseThrow(() -> new IllegalArgumentException("Question not found for id: " + id));
+//        model.addAttribute("question", question);
+//        model.addAttribute("answers", answerService.getAnswers(id));
+//        addGlobalAttributes(model);
+//        return "question/single";
+//    }
+@GetMapping("{id}")
+public String singleView(Model model, @PathVariable UUID id) {
+    // Pobieranie pytania
+    Question question = questionService.getQuestion(id)
+            .orElseThrow(() -> new IllegalArgumentException("Question not found for id: " + id));
+
+    // Pobieranie kategorii z pytania
+    Optional<Category> category = Optional.ofNullable(question.getCategory());
+
+    // Dodawanie danych do modelu
+    model.addAttribute("question", question);
+    model.addAttribute("category", category); // Dodajemy kategorię
+    model.addAttribute("answers", answerService.getAnswers(id));
+
+    // Inne globalne atrybuty
+    addGlobalAttributes(model);
+
+    return "question/single"; // Zwracamy widok
+}
+
 
     @GetMapping("add")
     public String addView(Model model){

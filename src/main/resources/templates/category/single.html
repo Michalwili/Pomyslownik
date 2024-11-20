@@ -5,8 +5,9 @@
 </head>
 <body>
 <th:block th:replace="template :: header" />
+<!--<div class="container" th:style="'background-image: url(\'/img/' + ${category.name} + '.jpg\'); background-size: cover; background-position: center; background-repeat: no-repeat;'">-->
 <div class="container">
-    <div class="row g-5 justify-content-center">
+<div class="row g-5 justify-content-center">
         <div class="col-md-8">
 
             <article class="blog-post text-center">
@@ -22,19 +23,22 @@
                     </thead>
                     <tbody>
                     <tr th:each="question : ${questions}">
-                        <td th:text="${question.name}">Pytanie</td>
+                        <td>
+                            <a th:href="@{'/questions/' + ${question.id}}" th:text="${question.name}"></a>
+                        </td>
+<!--                        <td th:text="${question.answers}"></td>-->
+<!--                        <td th:text="${question.name}">Pytanie</td>-->
                         <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
                         <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
                     </tr>
                     </tbody>
                 </table>
-                <nav class="blog-pagination" aria-label="Pagination">
-                    <a class="btn btn-outline-primary rounded-pill" href="#">Starsze</a>
-                    <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Nowsze</a>
-                </nav>
+<!--                <nav class="blog-pagination" aria-label="Pagination">-->
+<!--                    <a class="btn btn-outline-primary rounded-pill" href="#">Starsze</a>-->
+<!--                    <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Nowsze</a>-->
+<!--                </nav>-->
             </article>
-
-            <p class="text-center" th:text="${category.name}"></p>
+<!--            <p class="text-center" th:text="${category.name}"></p>-->
 
         </div>
     </div>

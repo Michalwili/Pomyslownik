@@ -5,68 +5,76 @@ insert into categories (id, name) values
                                       (gen_random_uuid(), 'Uroda i Styl'),
                                       (gen_random_uuid(), 'Kultura'),
                                       (gen_random_uuid(), 'Edukacja'),
+                                      (gen_random_uuid(), 'Gry'),
+                                      (gen_random_uuid(), 'Hobby'),
+                                      (gen_random_uuid(), 'Dom i Ogród'),
+                                      (gen_random_uuid(), 'Biznes'),
                                       (gen_random_uuid(), 'Finanse'),
+                                      (gen_random_uuid(), 'Kulinaria'),
+                                      (gen_random_uuid(), 'Komputery'),
+                                      (gen_random_uuid(), 'Osobiste'),
                                       (gen_random_uuid(), 'Motoryzacja'),
+                                      (gen_random_uuid(), 'Polityka'),
+                                      (gen_random_uuid(), 'Praca'),
                                       (gen_random_uuid(), 'Prezenty'),
                                       (gen_random_uuid(), 'Zakupy'),
-                                      (gen_random_uuid(), 'Biznes'),
                                       (gen_random_uuid(), 'Elektronika'),
-                                      (gen_random_uuid(), 'Gry'),
-                                      (gen_random_uuid(), 'Kulinaria'),
-                                      (gen_random_uuid(), 'Dom i Ogród'),
-                                      (gen_random_uuid(), 'Polityka');
+                                      (gen_random_uuid(), 'Rozrywka'),
+                                      (gen_random_uuid(), 'Związki'),
+                                      (gen_random_uuid(), 'Dodatkowa'),
+                                      (gen_random_uuid(), 'Inne');
 
+insert into questions (id, name, category_id) values
+                                                  (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje w Polsce?', (select id from categories where name = 'Turystyka')),
+                                                  (gen_random_uuid(), 'Gdzie najlepiej spędzić wakacje w Europie?', (select id from categories where name = 'Turystyka')),
+                                                  (gen_random_uuid(), 'Dlaczego warto uczyć się programowania?', (select id from categories where name = 'Edukacja')),
+                                                  (gen_random_uuid(), 'Dlaczego Java jest dobrym językiem na start?', (select id from categories where name = 'Edukacja')),
+                                                  (gen_random_uuid(), 'Jakie są najzdrowsze warzywa?', (select id from categories where name = 'Zdrowie')),
+                                                  (gen_random_uuid(), 'Jakie są zalety biegania?', (select id from categories where name = 'Zdrowie')),
+                                                  (gen_random_uuid(), 'Jakie gry komputerowe są najlepsze na PC?', (select id from categories where name = 'Gry')),
+                                                  (gen_random_uuid(), 'Jakie są najlepsze hobby na relaks?', (select id from categories where name = 'Hobby')),
+                                                  (gen_random_uuid(), 'Co powinno znaleźć się w idealnym ogrodzie?', (select id from categories where name = 'Dom i Ogród')),
+                                                  (gen_random_uuid(), 'Jakie są najnowsze trendy w biznesie?', (select id from categories where name = 'Biznes')),
+                                                  (gen_random_uuid(), 'Jakie inwestycje są najlepsze w 2024 roku?', (select id from categories where name = 'Finanse')),
+                                                  (gen_random_uuid(), 'Jakie są przepisy na szybki obiad?', (select id from categories where name = 'Kulinaria')),
+                                                  (gen_random_uuid(), 'Jakie komputery polecacie do gier?', (select id from categories where name = 'Komputery')),
+                                                  (gen_random_uuid(), 'Jakie są najczęstsze problemy w związkach?', (select id from categories where name = 'Związki')),
+                                                  (gen_random_uuid(), 'Jakie są zalety posiadania psa?', (select id from categories where name = 'Zwierzęta'));
 
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jak dbać o zdrową dietę?', (select id from categories where name = 'Zdrowie')),
-    (gen_random_uuid(), 'Jakie są objawy przeziębienia?', (select id from categories where name = 'Zdrowie')),
-    (gen_random_uuid(), 'Co to jest zdrowy tryb życia?', (select id from categories where name = 'Zdrowie'));
-
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jakie są najpopularniejsze rasy psów?', (select id from categories where name = 'Zwierzęta')),
-    (gen_random_uuid(), 'Jak zadbać o kota w mieszkaniu?', (select id from categories where name = 'Zwierzęta')),
-    (gen_random_uuid(), 'Jakie są najlepsze diety dla psów?', (select id from categories where name = 'Zwierzęta'));
-
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jakie miejsca odwiedzić w Tatrach?', (select id from categories where name = 'Turystyka')),
-    (gen_random_uuid(), 'Gdzie spędzić wakacje nad morzem?', (select id from categories where name = 'Turystyka')),
-    (gen_random_uuid(), 'Jakie są najpiękniejsze szlaki turystyczne w Polsce?', (select id from categories where name = 'Turystyka'));
-
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jakie kosmetyki są najlepsze dla cery wrażliwej?', (select id from categories where name = 'Uroda i Styl')),
-    (gen_random_uuid(), 'Jakie są najnowsze trendy w modzie?', (select id from categories where name = 'Uroda i Styl')),
-    (gen_random_uuid(), 'Jak dbać o włosy latem?', (select id from categories where name = 'Uroda i Styl'));
-
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jakie książki warto przeczytać w tym roku?', (select id from categories where name = 'Kultura')),
-    (gen_random_uuid(), 'Jakie filmy zdobyły Oscary w ostatnich latach?', (select id from categories where name = 'Kultura')),
-    (gen_random_uuid(), 'Jakie są najważniejsze wydarzenia kulturalne w Polsce?', (select id from categories where name = 'Kultura'));
-
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jakie są najlepsze metody nauki języków obcych?', (select id from categories where name = 'Edukacja')),
-    (gen_random_uuid(), 'Jakie kursy online są najbardziej popularne?', (select id from categories where name = 'Edukacja')),
-    (gen_random_uuid(), 'Jakie umiejętności są potrzebne w przyszłości?', (select id from categories where name = 'Edukacja'));
-
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jak oszczędzać na emeryturę?', (select id from categories where name = 'Finanse')),
-    (gen_random_uuid(), 'Jak inwestować w nieruchomości?', (select id from categories where name = 'Finanse')),
-    (gen_random_uuid(), 'Jakie są najlepsze sposoby na budżet domowy?', (select id from categories where name = 'Finanse'));
-
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jakie są najlepsze auta do miasta?', (select id from categories where name = 'Motoryzacja')),
-    (gen_random_uuid(), 'Jak przygotować samochód do zimy?', (select id from categories where name = 'Motoryzacja')),
-    (gen_random_uuid(), 'Jakie są najnowsze trendy w motoryzacji?', (select id from categories where name = 'Motoryzacja'));
-
-insert into questions(id, name, category_id)
-values
-    (gen_random_uuid(), 'Jakie są główne partie polityczne w Polsce?', (select id from categories where name = 'Polityka')),
-    (gen_random_uuid(), 'Jakie są najważniejsze wydarzenia polityczne ostatnich lat?', (select id from categories where name = 'Polityka')),
-    (gen_random_uuid(), 'Jak wygląda system wyborczy w Polsce?', (select id from categories where name = 'Polityka'));
+insert into answers (id, name, question_id) values
+                                                (gen_random_uuid(), 'Marchewka', (select id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+                                                (gen_random_uuid(), 'Bakłażan', (select id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+                                                (gen_random_uuid(), 'Brokuł', (select id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+                                                (gen_random_uuid(), 'Dynia', (select id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+                                                (gen_random_uuid(), 'Groch', (select id from questions where name = 'Jakie są najzdrowsze warzywa?')),
+                                                (gen_random_uuid(), 'Gdańsk', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje w Polsce?')),
+                                                (gen_random_uuid(), 'Bieszczady', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje w Polsce?')),
+                                                (gen_random_uuid(), 'Mazury', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje w Polsce?')),
+                                                (gen_random_uuid(), 'Barcelona', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje w Europie?')),
+                                                (gen_random_uuid(), 'Rzym', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje w Europie?')),
+                                                (gen_random_uuid(), 'Paryż', (select id from questions where name = 'Gdzie najlepiej spędzić wakacje w Europie?')),
+                                                (gen_random_uuid(), 'Programowanie rozwija umiejętności logicznego myślenia', (select id from questions where name = 'Dlaczego warto uczyć się programowania?')),
+                                                (gen_random_uuid(), 'Java ma dużą społeczność i dokumentację', (select id from questions where name = 'Dlaczego Java jest dobrym językiem na start?')),
+                                                (gen_random_uuid(), 'Bieganie poprawia kondycję fizyczną i zdrowie serca', (select id from questions where name = 'Jakie są zalety biegania?')),
+                                                (gen_random_uuid(), 'Zwiększa energię, redukuje stres', (select id from questions where name = 'Jakie są zalety biegania?')),
+                                                (gen_random_uuid(), 'The Witcher 3', (select id from questions where name = 'Jakie gry komputerowe są najlepsze na PC?')),
+                                                (gen_random_uuid(), 'Cyberpunk 2077', (select id from questions where name = 'Jakie gry komputerowe są najlepsze na PC?')),
+                                                (gen_random_uuid(), 'Red Dead Redemption 2', (select id from questions where name = 'Jakie gry komputerowe są najlepsze na PC?')),
+                                                (gen_random_uuid(), 'Czytanie książek', (select id from questions where name = 'Jakie są najlepsze hobby na relaks?')),
+                                                (gen_random_uuid(), 'Ogrodnictwo', (select id from questions where name = 'Jakie są najlepsze hobby na relaks?')),
+                                                (gen_random_uuid(), 'Fotografia', (select id from questions where name = 'Jakie są najlepsze hobby na relaks?')),
+                                                (gen_random_uuid(), 'Stół ogrodowy', (select id from questions where name = 'Co powinno znaleźć się w idealnym ogrodzie?')),
+                                                (gen_random_uuid(), 'Grill', (select id from questions where name = 'Co powinno znaleźć się w idealnym ogrodzie?')),
+                                                (gen_random_uuid(), 'Fontanna', (select id from questions where name = 'Co powinno znaleźć się w idealnym ogrodzie?')),
+                                                (gen_random_uuid(), 'Inwestycje w akcje', (select id from questions where name = 'Jakie inwestycje są najlepsze w 2024 roku?')),
+                                                (gen_random_uuid(), 'Lokaty bankowe', (select id from questions where name = 'Jakie inwestycje są najlepsze w 2024 roku?')),
+                                                (gen_random_uuid(), 'Nieruchomości', (select id from questions where name = 'Jakie inwestycje są najlepsze w 2024 roku?')),
+                                                (gen_random_uuid(), 'Zupa pomidorowa', (select id from questions where name = 'Jakie przepisy na szybki obiad?')),
+                                                (gen_random_uuid(), 'Makaron z sosem pesto', (select id from questions where name = 'Jakie przepisy na szybki obiad?')),
+                                                (gen_random_uuid(), 'Sałatka grecka', (select id from questions where name = 'Jakie przepisy na szybki obiad?')),
+                                                (gen_random_uuid(), 'Laptop Dell XPS 15', (select id from questions where name = 'Jakie komputery polecacie do gier?')),
+                                                (gen_random_uuid(), 'PC z kartą RTX 3080', (select id from questions where name = 'Jakie komputery polecacie do gier?')),
+                                                (gen_random_uuid(), 'Razer Blade 15', (select id from questions where name = 'Jakie komputery polecacie do gier?')),
+                                                (gen_random_uuid(), 'Pies poprawia samopoczucie i zmniejsza stres', (select id from questions where name = 'Jakie są zalety posiadania psa?')),
+                                                (gen_random_uuid(), 'Pies jest wiernym towarzyszem', (select id from questions where name = 'Jakie są zalety posiadania psa?')),
+                                                (gen_random_uuid(), 'Pies zmniejsza poczucie samotności', (select id from questions where name = 'Jakie są zalety posiadania psa?'));

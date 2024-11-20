@@ -27,7 +27,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="question : ${questionsPage.content}">
-                        <td th:text="${question.name}">Pytanie</td>
+                        <td>
+                            <a th:href="@{'/questions/' + ${question.id}}" th:text="${question.name}"></a>
+                        </td>
+<!--                        <td th:text="${question.answers}"></td>-->
                         <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
                         <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
                     </tr>

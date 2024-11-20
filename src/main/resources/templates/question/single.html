@@ -10,6 +10,9 @@
         <div class="col-md-8">
 
             <article class="blog-post text-center">
+                <h2 class="blog-post-title">
+                    <span th:if="${category.isPresent()}" th:text="${category.get().name}">No category</span>
+                </h2>
                 <h2 class="display-5 link-body-emphasis mb-4" th:text="${question.name}"></h2>
 
                 <table class="table table-bordered table-striped text-center">
@@ -28,13 +31,13 @@
                     </tr>
                     </tbody>
                 </table>
-                <nav class="blog-pagination" aria-label="Pagination">
-                    <a class="btn btn-outline-primary rounded-pill" href="#">Starsze</a>
-                    <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Nowsze</a>
-                </nav>
+<!--                <nav class="blog-pagination" aria-label="Pagination">-->
+<!--                    <a class="btn btn-outline-primary rounded-pill" href="#">Starsze</a>-->
+<!--                    <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Nowsze</a>-->
+<!--                </nav>-->
             </article>
 
-            <p class="text-center" th:text="${question.name}"></p>
+<!--            <p class="text-center" th:text="${question.name}"></p>-->
 
         </div>
     </div>

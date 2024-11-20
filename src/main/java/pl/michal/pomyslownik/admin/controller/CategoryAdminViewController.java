@@ -2,6 +2,7 @@ package pl.michal.pomyslownik.admin.controller;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,20 +35,22 @@ public class CategoryAdminViewController {
             @RequestParam(name = "field", required = false, defaultValue = "id") String field,
             @RequestParam(name = "direction", required = false, defaultValue = "asc") String direction,
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(name = "size", required = false, defaultValue = "10") int size,
-            Model model){
+            @RequestParam(name = "size", required = false, defaultValue = "20") int size,
+            Model model
+    ) {
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.fromString(direction), field);
-        String reverseSort = null;
-        if("asc".equals(direction)){
-            reverseSort = "desc";
-        } else {
-            reverseSort = "asc";
-        }
-        Page<Category> catgegoriesPage = categoryService.getCategories(search, pageable);
-        model.addAttribute("categoriesPage", catgegoriesPage);
+
+        String reverseSort = direction.equals("asc") ? "desc" : "asc";
+
+        Page<Category> categoriesPage = categoryService.getCategories(search, pageable);
+        model.addAttribute("categoriesPage", categoriesPage);
         model.addAttribute("search", search);
         model.addAttribute("reverseSort", reverseSort);
-        paging(model, catgegoriesPage);
+        model.addAttribute("direction", direction);
+        model.addAttribute("field", field);
+
+        paging(model, categoriesPage);
+
         return "admin/category/index";
     }
 
@@ -85,8 +88,14 @@ public class CategoryAdminViewController {
 
     @GetMapping("{id}/delete")
     public String deleteView(@PathVariable UUID id, RedirectAttributes ra) {
-        categoryService.deleteCategory(id);
-        ra.addFlashAttribute("message", Message.info("Kategoria usunięta"));
+        try {
+            categoryService.deleteCategory(id);
+            ra.addFlashAttribute("message", Message.info("Kategoria usunięta"));
+        } catch (DataIntegrityViolationException e) {
+            ra.addFlashAttribute("error", "Nie można usunąć kategorii, ponieważ jest powiązana z innymi elementami.");
+        } catch (Exception e) {
+            ra.addFlashAttribute("error", "Wystąpił błąd podczas usuwania kategorii.");
+        }
         return "redirect:/admin/categories";
     }
 }
