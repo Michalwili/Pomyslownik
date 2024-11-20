@@ -8,6 +8,7 @@ import pl.michal.pomyslownik.question.domain.repository.AnswerRepository;
 import pl.michal.pomyslownik.question.domain.repository.QuestionRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -52,7 +53,18 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
-    public void deleteAnswer(UUID answerId) {
-        answerRepository.deleteById(answerId);
+//    public void deleteAnswer(UUID answerId) {
+//        answerRepository.deleteById(answerId);
+//    }
+    public void deleteAnswer(UUID id) {
+        if (!answerRepository.existsById(id)) {
+            throw new IllegalArgumentException("Odpowiedź o tym ID nie istnieje.");
+        }
+        answerRepository.deleteById(id);
     }
+    @Transactional
+    public void saveAnswer(Answer answer) {
+        answerRepository.save(answer); // Zapisujemy odpowiedź do bazy danych
+    }
+
 }

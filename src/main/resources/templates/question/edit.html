@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: head(title = 'Edycja odpowiedzi')">
+    <link rel="stylesheet" href="/static/css/singleStyle.css">
+</head>
+<body>
+<th:block th:replace="template :: header" />
+<div class="container">
+    <div class="row g-5 justify-content-center">
+        <div class="col-md-8">
+            <article class="blog-post text-center">
+                <h2 class="blog-post-title">Edycja odpowiedzi</h2>
+
+
+                <form th:action="@{/answers/{id}/edit(id=${answer.id})}" method="post">
+
+                    <input type="hidden" name="questionId" th:value="${questionId}" />
+
+                    <div class="form-group">
+                        <label for="name">Nazwa odpowiedzi</label>
+                        <input type="text" id="name" name="name" class="form-control" th:value="${answer.name}" required />
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                    </div>
+                </form>
+                <a href="#" th:href="@{/questions/{id}(id=${questionId})}" class="btn btn-secondary mt-3">Powrót do pytania</a>
+            </article>
+        </div>
+    </div>
+</div>
+<th:block th:replace="template :: footer" />
+</body>
+</html>

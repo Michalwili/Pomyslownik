@@ -16,9 +16,7 @@
                 <table class="table table-bordered table-striped text-center">
                     <thead>
                     <tr>
-                        <th>Nazwa</th>
-                        <th>Edytuj</th>
-                        <th>Usuń</th>
+                        <th>Pytanie</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,19 +24,9 @@
                         <td>
                             <a th:href="@{'/questions/' + ${question.id}}" th:text="${question.name}"></a>
                         </td>
-<!--                        <td th:text="${question.answers}"></td>-->
-<!--                        <td th:text="${question.name}">Pytanie</td>-->
-                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
-                    </tr>
                     </tbody>
-                </table>
-<!--                <nav class="blog-pagination" aria-label="Pagination">-->
-<!--                    <a class="btn btn-outline-primary rounded-pill" href="#">Starsze</a>-->
-<!--                    <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Nowsze</a>-->
-<!--                </nav>-->
+                    </table>
             </article>
-<!--            <p class="text-center" th:text="${category.name}"></p>-->
 
         </div>
     </div>

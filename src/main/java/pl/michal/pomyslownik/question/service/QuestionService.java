@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.michal.pomyslownik.common.dto.StatisticsDto;
+import pl.michal.pomyslownik.question.domain.model.Answer;
 import pl.michal.pomyslownik.question.domain.model.Question;
 import pl.michal.pomyslownik.question.domain.repository.AnswerRepository;
 import pl.michal.pomyslownik.question.domain.repository.QuestionRepository;
@@ -121,6 +122,10 @@ public class QuestionService {
     @Transactional(readOnly = true)
     public StatisticsDto statistics() {
         return questionRepository.statistics();
+    }
+    @Transactional
+    public void saveAnswer(Answer answer) {
+        answerRepository.save(answer);
     }
 }
 

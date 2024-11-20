@@ -1,13 +1,16 @@
 package pl.michal.pomyslownik.question.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.michal.pomyslownik.IdeasConfiguration;
+import pl.michal.pomyslownik.category.common.dto.Message;
 import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.service.CategoryService;
 import pl.michal.pomyslownik.common.controller.IdeasCommonViewController;
@@ -62,22 +65,19 @@ public class QuestionViewController extends IdeasCommonViewController {
 //    }
 @GetMapping("{id}")
 public String singleView(Model model, @PathVariable UUID id) {
-    // Pobieranie pytania
+
     Question question = questionService.getQuestion(id)
             .orElseThrow(() -> new IllegalArgumentException("Question not found for id: " + id));
 
-    // Pobieranie kategorii z pytania
     Optional<Category> category = Optional.ofNullable(question.getCategory());
 
-    // Dodawanie danych do modelu
     model.addAttribute("question", question);
-    model.addAttribute("category", category); // Dodajemy kategorię
+    model.addAttribute("category", category);
     model.addAttribute("answers", answerService.getAnswers(id));
 
-    // Inne globalne atrybuty
     addGlobalAttributes(model);
 
-    return "question/single"; // Zwracamy widok
+    return "question/single";
 }
 
 
@@ -125,5 +125,16 @@ public String singleView(Model model, @PathVariable UUID id) {
 
         return "question/index";
     }
+//    @GetMapping("/{id}/delete")
+//    public String deleteQuestion(@PathVariable UUID id, RedirectAttributes ra) {
+//        try {
+//            questionService.deleteQuestion(id);
+//            ra.addFlashAttribute("message", Message.info("Pytanie zostało pomyślnie usunięte."));
+//        } catch (Exception e) {
+//            ra.addFlashAttribute("error", "Wystąpił błąd podczas usuwania pytania.");
+//        }
+//        return "redirect:/categories";
+//    }
+
 
 }

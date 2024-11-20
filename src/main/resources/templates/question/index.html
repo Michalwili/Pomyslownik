@@ -15,9 +15,7 @@
                     <table class="table table-bordered table-striped text-center">
                         <thead>
                         <tr>
-                            <th>Nazwa</th>
-                            <th>Edytuj</th>
-                            <th>Usuń</th>
+                            <th>Pytania</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -25,10 +23,7 @@
                             <td>
                                 <a th:href="@{'/questions/' + ${question.id}}" th:text="${question.name}"></a>
                             </td>
-<!--                            <td th:text="${question.answers}"></td>-->
-<!--                            <td th:text="${question.name}">Pytanie</td>-->
-                            <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
-                            <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+
                         </tr>
                         </tbody>
                     </table>
@@ -38,24 +33,6 @@
                     <p>Wybierz kategorię żeby zobaczyć pytania.</p>
                 </div>
 
-
-<!--                -->
-<!--                <table class="table table-bordered table-striped text-center">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th>Nazwa</th>-->
-<!--                        <th>Edytuj</th>-->
-<!--                        <th>Usuń</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    <tr th:each="question : ${questionsPage.content}">-->
-<!--                        <td th:text="${question.name}">Pytanie</td>-->
-<!--                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>-->
-<!--                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
             </article>
             <nav th:if="${questionsPage != null and questionsPage.totalPages > 0}" class="blog-pagination" aria-label="Pagination">
                 <a class="btn btn-outline-primary" th:each="pageNumber : ${pageNumbers}"

@@ -26,22 +26,31 @@
                     <tbody>
                     <tr th:each="answer : ${answers}">
                         <td th:text="${answer.name}">Odpowiedź</td>
-                        <td><a href="#" class="btn btn-warning btn-sm">Edytuj</a></td>
-                        <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                        <td>
+                            <a href="#" th:href="@{/answers/{id}/edit(id=${answer.id}, questionId=${question.id})}" class="btn btn-warning btn-sm">Edytuj</a>
+                        </td>
+                        <td>
+                            <a href="#" th:href="@{/answers/{id}/delete(id=${answer.id}, questionId=${question.id})}" class="btn btn-danger btn-sm">Usuń</a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
-<!--                <nav class="blog-pagination" aria-label="Pagination">-->
-<!--                    <a class="btn btn-outline-primary rounded-pill" href="#">Starsze</a>-->
-<!--                    <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Nowsze</a>-->
-<!--                </nav>-->
+
+                <form th:action="@{/answers/create}" method="post">
+                    <input type="hidden" name="id" th:value="${question.id}" />
+                    <div class="form-group">
+                        <label for="name">Nowa odpowiedź:</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Wpisz odpowiedź" required />
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-success">Dodaj odpowiedź</button>
+                    </div>
+                </form>
             </article>
-
-<!--            <p class="text-center" th:text="${question.name}"></p>-->
-
         </div>
     </div>
 </div>
+<br>
 <th:block th:replace="template :: footer" />
 </body>
 </html>
