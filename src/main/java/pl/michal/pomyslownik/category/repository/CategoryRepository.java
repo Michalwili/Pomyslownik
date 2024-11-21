@@ -26,4 +26,5 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
 
     long count();
 
+    List<Category> findByNameContainingIgnoreCase(String search);
 }

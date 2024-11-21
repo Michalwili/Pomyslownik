@@ -75,4 +75,8 @@ public class CategoryService {
     public List<CategoryWithStatisticsDto> findAllWithStatistics() {
         return categoryRepository.findAllWithStatistics();
     }
+
+    public List<Category> searchCategories(String search) {
+        return categoryRepository.findByNameContainingIgnoreCase(search);
+    }
 }

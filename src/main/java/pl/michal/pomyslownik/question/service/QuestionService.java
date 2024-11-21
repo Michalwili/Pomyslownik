@@ -127,5 +127,10 @@ public class QuestionService {
     public void saveAnswer(Answer answer) {
         answerRepository.save(answer);
     }
+
+    @Transactional
+    public void saveQuestion(Question question) {
+        questionRepository.save(question);
+    }
 }
 

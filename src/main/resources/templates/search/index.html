@@ -10,9 +10,9 @@
         <div class="col-md-8">
 
             <form>
-                <input type="text" name="query" th:value="${query}"/>
-                <button class="btn btn-primary" type="submit">Szukaj</button>
-            </form>
+            <input type="text" name="query" th:value="${query}"/>
+            <button class="btn btn-primary" type="submit">Szukaj</button>
+        </form>
             <br>
             <p th:if="${query != null and questionsPage.getNumberOfElements() == 0}">Brak wyników</p>
 

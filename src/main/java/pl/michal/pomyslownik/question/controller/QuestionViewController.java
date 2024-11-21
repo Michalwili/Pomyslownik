@@ -1,24 +1,24 @@
 package pl.michal.pomyslownik.question.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.michal.pomyslownik.IdeasConfiguration;
-import pl.michal.pomyslownik.category.common.dto.Message;
+
 import pl.michal.pomyslownik.category.model.Category;
 import pl.michal.pomyslownik.category.service.CategoryService;
 import pl.michal.pomyslownik.common.controller.IdeasCommonViewController;
+import pl.michal.pomyslownik.question.domain.model.Answer;
 import pl.michal.pomyslownik.question.domain.model.Question;
 import pl.michal.pomyslownik.question.service.AnswerService;
 import pl.michal.pomyslownik.question.service.QuestionService;
 
-import java.util.List;
+
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,8 +34,6 @@ public class QuestionViewController extends IdeasCommonViewController {
     private final CategoryService categoryService;
     private final IdeasConfiguration ideasConfiguration;
 
-
-
     @GetMapping
     public String indexView(Model model) {
         model.addAttribute("questions", questionService.getQuestions());
@@ -44,27 +42,8 @@ public class QuestionViewController extends IdeasCommonViewController {
 
     }
 
-
-
-//    @GetMapping("{id}")
-//    public String singleView(Model model, @PathVariable UUID id) {
-//        model.addAttribute("question", questionService.getQuestion(id));
-//        model.addAttribute("answers", answerService.getAnswers(id));
-//        model.addAttribute("categories", categoryService.getCategories());
-//        return "question/single";
-//    }
-
-//    @GetMapping("{id}")
-//    public String singleView(Model model, @PathVariable UUID id) {
-//        Question question = questionService.getQuestion(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Question not found for id: " + id));
-//        model.addAttribute("question", question);
-//        model.addAttribute("answers", answerService.getAnswers(id));
-//        addGlobalAttributes(model);
-//        return "question/single";
-//    }
-@GetMapping("{id}")
-public String singleView(Model model, @PathVariable UUID id) {
+    @GetMapping("{id}")
+    public String singleView(Model model, @PathVariable UUID id) {
 
     Question question = questionService.getQuestion(id)
             .orElseThrow(() -> new IllegalArgumentException("Question not found for id: " + id));
@@ -78,7 +57,7 @@ public String singleView(Model model, @PathVariable UUID id) {
     addGlobalAttributes(model);
 
     return "question/single";
-}
+    }
 
 
     @GetMapping("add")
@@ -94,7 +73,6 @@ public String singleView(Model model, @PathVariable UUID id) {
 
         return "redirect:/questions";
     }
-
 
     @GetMapping("hot")
     public String hotView(
@@ -125,16 +103,25 @@ public String singleView(Model model, @PathVariable UUID id) {
 
         return "question/index";
     }
-//    @GetMapping("/{id}/delete")
-//    public String deleteQuestion(@PathVariable UUID id, RedirectAttributes ra) {
-//        try {
-//            questionService.deleteQuestion(id);
-//            ra.addFlashAttribute("message", Message.info("Pytanie zostało pomyślnie usunięte."));
-//        } catch (Exception e) {
-//            ra.addFlashAttribute("error", "Wystąpił błąd podczas usuwania pytania.");
-//        }
-//        return "redirect:/categories";
-//    }
+    @PostMapping("/create")
+    public String createQuestion(@RequestParam UUID id, @RequestParam String name, RedirectAttributes ra) {
+        try {
+            Optional<Category> optionalCategory = categoryService.getCategory(id);
+
+            if (optionalCategory.isPresent()) {
+                Question question = new Question();
+                question.setName(name);
+                question.setCategory(optionalCategory.get());
+                questionService.saveQuestion(question);
+                ra.addFlashAttribute("message", "Pytanie zostało pomyślnie dodanae.");
+            } else {
+                ra.addFlashAttribute("error", "Kategoria o podanym ID nie istnieje.");
+            }
+        } catch (Exception e) {
+            ra.addFlashAttribute("error", "Wystąpił błąd podczas dodawania pytania.");
+        }
+        return "redirect:/categories/" + id;
+    }
 
 
 }
