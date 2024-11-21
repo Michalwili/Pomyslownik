@@ -195,9 +195,9 @@
                     <p class="mb-4"></p>
 
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4" >
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"></h6>
+                            <h6 class="m-0 font-weight-bold text-primary" th:text="'[znaleziono: '+${categoriesPage.totalElements}+${#strings.isEmpty(search) ? '' : ', search: ' + search}+']'"></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
