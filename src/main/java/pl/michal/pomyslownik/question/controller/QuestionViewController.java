@@ -79,7 +79,7 @@ public class QuestionViewController extends IdeasCommonViewController {
             @RequestParam(name = "page", defaultValue = "1") int page,
             Model model
     ){
-        PageRequest pageRequest = PageRequest.of(page - 1, ideasConfiguration.getPagingPageSize());
+        PageRequest pageRequest = PageRequest.of(page - 1, 5);
 
         Page<Question> questionsPage = questionService.findHot(pageRequest);
         model.addAttribute("questionsPage", questionsPage);
